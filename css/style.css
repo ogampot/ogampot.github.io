@@ -1,0 +1,830 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+}
+
+.main {
+    height: 100%;
+    background-color: #ffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.main-part {
+    flex-basis: 100%;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.main-part:hover {
+    flex-basis: 300%;
+}
+
+.main-part__ogampot {
+    z-index: 0;
+    background-color: #c7fdff;
+}
+
+.main-part__ogampot .main-part__part-back {
+    width: 300%;
+    height: 300%;
+    top: -150%;
+    left: -150%;
+    position: fixed;
+    z-index: 0;
+    background-image: url("../resources/gif/ogamgif2reverse.gif");
+    background-repeat: repeat-x repeat-y;
+    background-size: 150px;
+    transform: rotate(-35deg);
+    filter: blur(0px);
+    transition: 0.5s;
+}
+
+.main-part__ogampot .main-part__part-back-2 {
+    width: 300%;
+    height: 300%;
+    top: -150%;
+    left: -150%;
+    position: fixed;
+    z-index: -10;
+    background-image: url("../resources/gif/ogamgif.gif");
+    background-repeat: repeat-x repeat-y;
+    background-size: 75px;
+    transform: rotate(-45deg);
+    opacity: 50%;
+    filter: blur(1px);
+    transition: 0.5s;
+}
+
+.main-part__ogampot:hover .main-part__part-back {
+    transform: rotate(-33deg);
+    filter: blur(3px);
+}
+
+.main-part__ogampot:hover .main-part__part-back-2 {
+    transform: rotate(-47deg);
+    filter: blur(4px);
+}
+
+.main-part__ic63 {
+    z-index: 200;
+    background-image: url("../resources/gif/ic63.gif");
+    background-repeat: no-repeat round;
+    background-size: 120vh;
+    background-position: center 0;
+}
+
+.main-part__ogamlet {
+    z-index: 300;
+}
+
+.main-part__ogamlet .main-part__part-back {
+    z-index: 50;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../resources/gif/whois_Trim.gif");
+    background-repeat: repeat repeat;
+    background-size: 100vh;
+    background-position: center center;
+    transition: 0.5s;
+}
+
+.main-part__ogamlet:hover .main-part__part-back {
+    background-image: url("../resources/gif/whois180.gif");
+    background-size: 200vh;
+    filter: saturate(7);
+    animation: hoverImgGlitch 10s infinite ease, hoverImgInverse 14s infinite ease;
+}
+
+.main-part__content {
+    z-index: 1000;
+}
+
+.main-part__title {
+    text-align: center;
+}
+
+.main-part__ogampot .main-part__title {
+    padding: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    text-shadow:    #f1ff96 1.5px 2.5px, 
+                    #adff92 -1.5px 2.5px, 
+                    #92ffd5 1.5px -2.5px, 
+                    #92d7ff -1.5px -2.5px;
+    border: #000000 5px dashed;
+    border-radius: 0px;
+    background-color: #ff6adc;
+    background-clip: border-box;
+    transition: 0.5s;
+}
+
+.main-part__ogampot:hover .main-part__title {
+    border: #ffffff9d 10px solid;
+    background-clip: padding-box;
+    box-shadow: #ff6adc 0px 0px 25px 7px;
+}
+
+.main-part__ic63 .main-part__title {
+    padding: 10px;
+    margin-top: 50px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-shadow:    #df96ff 2px 2px,
+                    #92ffbc -2px 2px,
+                    #efff92 2px -2px,
+                    #92d5ff -2px -2px;
+    transition: 0.5s;
+}
+
+.main-part__ogamlet .main-part__title {
+    position: relative;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.5s;
+}
+
+.main-part__ogamlet .main-part__title p {
+    text-shadow: #ffffff 0px 0px 5px;
+    animation: hoverTextResize1 8s infinite ease, hoverTextResize2 3s infinite ease;
+}
+
+.main-part__ogamlet:hover .main-part__title p {
+    text-shadow: #ffffff00 0px 0px 5px;
+}
+
+.main-part__ogamlet:hover .main-part__title {
+    padding: 5px;
+    background-color: #ffffff50;
+}
+
+.main-part__ogamlet .main-part__title span {
+    z-index: 1;
+    color: #000000;
+    position: absolute;
+    top: 0;
+    left: 0; 
+}
+
+.main-part__ogamlet .main-part__title span:first-child {
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    transform: translateX(0px);
+}
+
+.main-part__ogamlet .main-part__title span:last-child {
+    clip-path: polygon(0 66%, 100% 66%, 100% 100%, 0 100%);
+    transform: translateX(0px);
+}
+
+.main-part__ogamlet:hover .main-part__title span {
+    padding: 5px;
+    color: #000000;
+}
+
+.main-part__ogamlet:hover .main-part__title span:first-child {
+    animation: hoverTextGlitch1 6s infinite ease, hoverTextGlitchResize1 9s infinite ease, hoverTextPadding1 4s infinite ease;
+}
+
+.main-part__ogamlet:hover .main-part__title span:last-child {
+    animation: hoverTextGlitch2 4s infinite ease, hoverTextGlitchResize2 7s infinite ease, hoverTextPadding2 5s infinite ease;
+}
+
+#ic63-table-row1 {
+    height: 95vh;
+}
+
+#ic63-table-row2 {
+    padding: 0px 1vw 2vh 1vw;
+    width: 100vw;
+    height: 5vh;
+    text-align: left;
+}
+
+.main-part__content-sources {
+    color: #1e122690;
+    font-size: 10px;
+    font-family: 'Times New Roman', Times, serif;
+    text-shadow:    #ffcdf9 2px 2px 3px, 
+                    #a58de8 -2px 2px 3px, 
+                    #d674b1 2px -2px 3px, 
+                    #52c1e9 -2px -2px 3px;
+}
+
+.main-part__content-sources a {
+    color: #ffffff95;
+}
+
+@keyframes hoverImgGlitch {
+    0% {
+        background-position-y: center;
+    }
+
+    2% {
+        background-position-y: center + 500px;
+    }
+
+    3% {
+        background-position-y: 0px;
+    }
+
+    7% {
+        background-position-y: 700px;
+    }
+
+    8% {
+        background-position-y: 0px;
+    }
+
+    9% {
+        background-position-y: center;
+    }
+
+    10% {
+        background-position-y: center;
+    }
+
+    40% {
+        background-position-y: center;
+    }
+
+    46% {
+        background-image: url("../resources/gif/whois180.gif");
+        background-position-y: 1200px;
+    }
+
+    46.9% {
+        background-image: url("../resources/gif/whois180.gif");
+    }
+
+    47% {
+        background-image: url("../resources/gif/whois_Trim.gif");
+        background-position-y: center;
+    }
+
+    48.9% {
+        background-image: url("../resources/gif/whois_Trim.gif");
+    }
+
+    49% {
+        background-image: url("../resources/gif/whois180.gif");
+        background-position-y: center;
+    }
+
+    52% {
+        background-position-y: 1200px;
+    }
+
+    53% {
+        background-position-y: center;
+    }
+
+    54.9% {
+        background-position-y: 1200px;
+    }
+
+    55% {
+        background-position-y: 1200px;
+    }
+
+    59% {
+        background-position-y: center;
+    }
+
+    60% {
+        background-position-y: 1000px;
+    }
+
+    61% {
+        background-position-y: 0px;
+    }
+
+    62% {
+        background-position-y: center;
+    }
+
+    66.9% {
+        background-image: url("../resources/gif/whois180.gif");
+    }
+
+    67% {
+        background-image: url("../resources/gif/whois_Trim.gif");
+    }
+
+    67.9% {
+        background-image: url("../resources/gif/whois_Trim.gif");
+    }
+
+    68% {
+        background-image: url("../resources/gif/whois180.gif");
+    }
+
+    100% {
+        background-position-y: center;
+    }
+}
+
+@keyframes hoverImgInverse {
+    0% {
+        filter: saturate(7);
+    }
+
+    8.89% {
+        filter: saturate(7);
+    }
+
+    8.9% {
+        filter: invert(0);
+    }
+
+    9% {
+        filter: invert(1);
+    }
+
+    9.9% {
+        filter: invert(1);
+    }
+
+    10% {
+        filter: invert(0);
+        filter: saturate(7);
+    }
+
+    11.89% {
+        filter: saturate(7);
+    }
+
+    11.9% {
+        filter: invert(0);
+    }
+
+    12% {
+        filter: invert(1);
+    }
+
+    12.9% {
+        filter: invert(1);
+    }
+
+    13% {
+        filter: invert(0);
+        filter: saturate(7);
+    }
+
+    21.89% {
+        filter: saturate(7);
+    }
+
+    21.9% {
+        filter: invert(0);
+    }
+
+    22% {
+        filter: invert(1);
+    }
+
+    22.9% {
+        filter: invert(1);
+    }
+
+    23% {
+        filter: invert(0);
+        filter: saturate(7);
+    }
+
+    54.89% {
+        filter: saturate(7);
+    }
+
+    54.9% {
+        filter: invert(0);
+    }
+
+    55% {
+        filter: invert(1);
+    }
+
+    58.9% {
+        filter: invert(1);
+    }
+
+    59% {
+        filter: invert(0);
+        filter: saturate(7);
+    }
+
+    100% {
+        filter: saturate(7);
+    }
+}
+
+@keyframes hoverTextGlitch1 {
+    0% {
+        transform: translateX(0px);
+    }
+
+    10.9% {
+        transform: translateX(0px);
+    }
+
+    11% {
+        transform: translateX(-5px);
+    }
+
+    11.9% {
+        transform: translateX(-7px);
+    }
+
+    12% {
+        transform: translateX(0px);
+    }
+
+    40.5% {
+        transform: translateX(0px);
+    }
+
+    40.6% {
+        transform: translateX(8px);
+    }
+
+    41.5% {
+        transform: translateX(-9px);
+    }
+
+    41.6% {
+        transform: translateX(0px);
+    }
+
+    46.9% {
+        transform: translate(0px 0px);
+    }
+
+    47% {
+        transform: translate(12px -6px);
+    }
+
+    47.9% {
+        transform: translate(14px -6px);
+    }
+
+    48% {
+        transform: translate(0px 0px);
+    }
+
+    76.9% {
+        transform: translate(0px 0px);
+    }
+
+    77% {
+        transform: translate(-7px -10px);
+    }
+
+    77.5% {
+        transform: translate(8px 0px);
+    }
+
+    77.6% {
+        transform: translate(0px 0px);
+    }
+}
+
+@keyframes hoverTextGlitch2 {
+    0% {
+        transform: translateX(0px);
+    }
+
+    9.9% {
+        transform: translateX(0px);
+    }
+
+    10% {
+        transform: translateX(6px);
+    }
+
+    10.9% {
+        transform: translateX(6px);
+    }
+
+    11% {
+        transform: translateX(0px);
+    }
+
+    39.9% {
+        transform: translateX(0px);
+    }
+
+    40% {
+        transform: translateX(15px);
+    }
+
+    40.9% {
+        transform: translateX(14px);
+    }
+
+    41% {
+        transform: translateX(0px);
+    }
+
+    46.9% {
+        transform: translateX(0px);
+    }
+
+    47% {
+        transform: translateX(-6px);
+    }
+
+    48.9% {
+        transform: translateX(-6px);
+    }
+
+    49% {
+        transform: translateX(0px);
+    }
+
+    61.9% {
+        transform: translate(0px 0px);
+    }
+
+    62% {
+        transform: translate(4px 7px);
+    }
+
+    62.9% {
+        transform: translate(5px 3px);
+    }
+
+    63% {
+        transform: translate(0px 0px);
+    }
+}
+
+@keyframes hoverTextGlitchResize1 {
+    0% {
+        clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    }
+
+    9.9% {
+        clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    }
+
+    10% {
+        clip-path: polygon(0 40%, 100% 40%, 100% 70%, 0 70%);
+    }
+
+    14% {
+        clip-path: polygon(0 40%, 100% 40%, 100% 70%, 0 70%);
+    }
+
+    15% {
+        clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    }
+
+    50% {
+        clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    }
+
+    51% {
+        clip-path: polygon(0 50%, 100% 50%, 100% 80%, 0 80%);
+    }
+
+    59% {
+        clip-path: polygon(0 50%, 100% 50%, 100% 80%, 0 80%);
+    }
+
+    60% {
+        clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    }
+}
+
+@keyframes hoverTextGlitchResize2 {
+    0% {
+        clip-path: polygon(0 66%, 100% 66%, 100% 100%, 0 100%);
+    }
+
+    9.9% {
+        clip-path: polygon(0 66%, 100% 66%, 100% 100%, 0 100%);
+    }
+
+    10% {
+        clip-path: polygon(0 76%, 100% 76%, 100% 90%, 0 90%);
+    }
+
+    14% {
+        clip-path: polygon(0 76%, 100% 76%, 100% 90%, 0 90%);
+    }
+
+    15% {
+        clip-path: polygon(0 66%, 100% 66%, 100% 100%, 0 100%);
+    }
+
+    50% {
+        clip-path: polygon(0 66%, 100% 66%, 100% 100%, 0 100%);
+    }
+
+    51% {
+        clip-path: polygon(0 46%, 100% 46%, 100% 80%, 0 80%);
+    }
+
+    59% {
+        clip-path: polygon(0 46%, 100% 46%, 100% 80%, 0 80%);
+    }
+
+    60% {
+        clip-path: polygon(0 46%, 100% 46%, 100% 80%, 0 80%);
+    }
+}
+
+@keyframes hoverTextPadding1 {
+    0% {
+        padding: 5px;
+    }
+
+    34% {
+        padding: 5px;
+    }
+
+    35% {
+        padding: 3px;
+    }
+    
+    37% {
+        padding: 3px;
+    }
+
+    38% {
+        padding: 5px;
+    }
+
+    84% {
+        padding: 5px;
+    }
+
+    85% {
+        padding: 6px;
+    }
+
+    88% {
+        padding: 6px;
+    }
+
+    89% {
+        padding: 5px;
+    }
+}
+
+@keyframes hoverTextPadding2 {
+    0% {
+        padding: 5px;
+    }
+
+    34% {
+        padding: 5px;
+    }
+
+    35% {
+        padding: 7px;
+    }
+
+    37% {
+        padding: 7px;
+    }
+
+    38% {
+        padding: 5px;
+    }
+
+    84% {
+        padding: 5px;
+    }
+
+    85% {
+        padding: 2px;
+    }
+
+    88% {
+        padding: 2px;
+    }
+
+    89% {
+        padding: 5px;
+    }
+}
+
+@keyframes hoverTextResize1 {
+    0% {
+        font-size: 40px;
+    }
+
+    49.9% {
+        font-size: 40px;
+    }
+
+    50% {
+        font-size: 37px;
+    }
+
+    55.9% {
+        font-size: 37px;
+    }
+
+    56% {
+        font-size: 40px;
+    }
+
+    90.9% {
+        font-size: 40px;
+    }
+
+    91% {
+        font-size: 42px;
+    }
+
+    93.9%
+    {
+        font-size: 42px;
+    }
+    
+    94% {
+        font-size: 40px;
+    }
+}
+
+@keyframes hoverTextResize2 {
+    0% {
+        font-size: 40px;
+    }
+
+    49.9% {
+        font-size: 40px;
+    }
+
+    50% {
+        font-size: 39px;
+    }
+
+    55.9% {
+        font-size: 39px;
+    }
+
+    56% {
+        font-size: 40px;
+    }
+
+    90.9% {
+        font-size: 40px;
+    }
+
+    91% {
+        font-size: 41px;
+    }
+
+    93.9% {
+        font-size: 41px;
+    }
+
+    94% {
+        font-size: 40px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .main {
+        flex-direction: column;
+    }
+
+    .main-part__ic63 {
+        background-repeat: no-repeat no-repeat;
+        background-size: 90vh;
+        background-position: center center;
+    }
+
+    #ic63-table-row1 {
+        height: auto;
+    }
+
+    #ic63-table-row2 {
+        padding: 0px 0px 0px 0px;
+        width: auto;
+        height: auto;
+        text-align: center;
+    }
+}
+
+@media screen and (min-width: 2000px) {
+    .main-part__ic63 {
+        background-repeat: repeat repeat;
+        background-size: 200vh;
+        background-position: center center;
+    }
+}
