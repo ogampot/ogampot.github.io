@@ -35,6 +35,11 @@ body {
     background-color: #c7fdff;
 }
 
+.main-part__ogampot a {
+    color: #000;
+    text-decoration: none;
+}
+
 .main-part__ogampot .main-part__part-back {
     width: 300%;
     height: 300%;
@@ -138,6 +143,7 @@ body {
 }
 
 .main-part__ic63 .main-part__title {
+    position: relative;
     padding: 10px;
     margin-top: 50px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -158,7 +164,7 @@ body {
 
 .main-part__ogamlet .main-part__title p {
     text-shadow: #ffffff 0px 0px 5px;
-    animation: hoverTextResize1 8s infinite ease, hoverTextResize2 3s infinite ease;
+    animation: hoverTextResize1 8s infinite linear, hoverTextResize2 3s infinite linear;
 }
 
 .main-part__ogamlet:hover .main-part__title p {
@@ -194,11 +200,11 @@ body {
 }
 
 .main-part__ogamlet:hover .main-part__title span:first-child {
-    animation: hoverTextGlitch1 6s infinite ease, hoverTextGlitchResize1 9s infinite ease, hoverTextPadding1 4s infinite ease;
+    animation: hoverTextGlitch1 6s infinite linear, hoverTextGlitchResize1 9s infinite linear, hoverTextPadding1 4s infinite linear;
 }
 
 .main-part__ogamlet:hover .main-part__title span:last-child {
-    animation: hoverTextGlitch2 4s infinite ease, hoverTextGlitchResize2 7s infinite ease, hoverTextPadding2 5s infinite ease;
+    animation: hoverTextGlitch2 4s infinite linear, hoverTextGlitchResize2 7s infinite linear, hoverTextPadding2 5s infinite linear;
 }
 
 #ic63-table-row1 {
@@ -212,7 +218,7 @@ body {
     text-align: left;
 }
 
-.main-part__content-sources {
+.main-part__ic63 .main-part__content-sources {
     color: #1e122690;
     font-size: 10px;
     font-family: 'Times New Roman', Times, serif;
@@ -222,8 +228,71 @@ body {
                     #52c1e9 -2px -2px 3px;
 }
 
-.main-part__content-sources a {
+.main-part__ic63 .main-part__content-sources a {
     color: #ffffff95;
+}
+
+.main-part__ic63 span {
+    --width: 160px;
+    --height: 160px;
+    z-index: -1;
+    width: calc(var(--width));
+    height: calc(var(--height));
+    position: absolute;
+    top: calc(50% - var(--width) / 2);
+    left: calc(50% - var(--height) / 2);
+    border: white 5px solid;
+    border-radius: 50%;
+    transition: 0.5s;
+}
+
+.main-part__ic63 span:nth-child(1) {
+    transform: rotate(0) scale(1, 1);
+}
+
+.main-part__ic63 span:nth-child(2) {
+    transform: rotate(60deg) scale(1, 1);
+}
+
+.main-part__ic63 span:nth-child(3) {
+    transform: rotate(120deg) scale(1, 1);
+}
+
+.main-part__ic63 span:nth-child(4) {
+    transform: rotate(-60deg) scale(1, 1);
+}
+
+.main-part__ic63 span:nth-child(5) {
+    transform: rotate(-120deg) scale(1, 1);
+}
+
+.main-part__ic63:hover span {
+    animation: rotateCircles 5s infinite linear;
+}
+
+.main-part__ic63:hover span:nth-child(1) {
+    transform: rotate(0) scale(0.75, 1.75);
+    animation: rotateCircles 5s infinite linear;
+}
+
+.main-part__ic63:hover span:nth-child(2) {
+    transform: rotate(60deg) scale(0.75, 1.75);
+    animation: rotateCircles 5s infinite linear;
+}
+
+.main-part__ic63:hover span:nth-child(3) {
+    transform: rotate(120deg) scale(0.75, 1.75);
+    animation: rotateCircles 5s infinite linear;
+}
+
+.main-part__ic63:hover span:nth-child(4) {
+    transform: rotate(-60deg) scale(0.75, 1.75);
+    animation: rotateCircles 5s infinite linear;
+}
+
+.main-part__ic63:hover span:nth-child(5) {
+    transform: rotate(-120deg) scale(0.75, 1.75);
+    animation: rotateCircles 5s infinite linear;
 }
 
 @keyframes hoverImgGlitch {
@@ -798,7 +867,13 @@ body {
     }
 }
 
-@media screen and (max-width: 700px) {
+@keyframes rotateCircles {
+    100% {
+        transform: scale(0.75, 1.75) rotate(360deg);
+    }
+}
+
+@media screen and (max-width: 670px) and (orientation: portrait) {
     .main {
         flex-direction: column;
     }
@@ -806,6 +881,30 @@ body {
     .main-part__ic63 {
         background-repeat: no-repeat no-repeat;
         background-size: 90vh;
+        background-position: center center;
+    }
+
+    #ic63-table-row1 {
+        height: auto;
+    }
+
+    #ic63-table-row2 {
+        padding: 0px 0px 0px 0px;
+        width: auto;
+        height: auto;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 670px) and (orientation: landscape) {
+    .main {
+        flex-direction: row;
+        font-size: 15px;
+    }
+
+    .main-part__ic63 {
+        background-repeat: no-repeat no-repeat;
+        background-size: 130vh;
         background-position: center center;
     }
 
