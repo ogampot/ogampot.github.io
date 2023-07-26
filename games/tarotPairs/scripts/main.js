@@ -1,4 +1,4 @@
-const cardFolderPath = "../resources/tarotIMG/";
+const cardFolderPath = "../../resources/tarotIMG/";
 const cardImageFormat = ".jpg";
 const cardBackImageName = "cardBack";
 const CardBackPath = cardFolderPath + cardBackImageName + cardImageFormat;
