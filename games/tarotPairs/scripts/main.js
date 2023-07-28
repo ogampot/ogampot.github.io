@@ -21,24 +21,34 @@ var cardsPerTableCount = cardsPerTableMultiplier * 2;
 var pairsCount = (tablesCount * cardsPerTableCount) / 2;
 
 const halfRotateDuration = 250;
-const halfRotateDurationWithDelay = halfRotateDuration * 6;
+const halfRotateDurationWithDelay = halfRotateDuration * 8;
 
 var element1;
 var element2;
 
 var canClick = true;
 
-var score = 0;
 var totalScore = 0;
 var totalMoves = 0;
 var roundsLeft = 10;
 var winCount = 0;
 
+var hour = 0;
+var minute = 0;
+var second = 0;
+var hrString = "00";
+var minString = "00";
+var secString = "00";
+var time = true;
+var stopWatchStarted = false;
+
 var won = false;
 
 const scorePerRound = 100;
 
-const seeCardsCost = 300;
+const seeCardsCost = 150;
+
+var isSimplified = false;
 
 // Managment
 
@@ -55,15 +65,17 @@ function Initialize()
         document.body.classList.remove(bodyPreloadClassName);
     }, halfRotateDurationWithDelay);
 
-    CardsRotateOnInitialization(halfRotateDuration);
-    CardsRotateOnInitialization(halfRotateDurationWithDelay);
+    CardsRotateOnInitialization(halfRotateDuration, CardRotateState.UNROTATE);
+    CardsRotateOnInitialization(halfRotateDurationWithDelay, CardRotateState.ROTATE);
 
     Update();
+
+    if(stopWatchStarted == false) StopWatch();
 }
 
 function Update()
 {
-    CheckScore();
+    CheckMatch();
     CheckSeeAllCardsButton();
     RefreshAllCounters();
 }
@@ -82,6 +94,19 @@ function OnMouseClick(e)
 function CardToggle(e)
 {
     if (e.classList.contains(CardRotateState.ROTATE)) // to unrotate (to card back)
+    {
+        CardRotate(e, CardBackPath, CardRotateState.ROTATE, CardRotateState.UNROTATE);
+    }
+    else // to rotate (to card front)
+    {
+        let cardImagePath = e.querySelector(".card-input").value;
+        CardRotate(e, cardImagePath, CardRotateState.UNROTATE, CardRotateState.ROTATE);
+    }
+}
+
+function CardToggle2(e, state)
+{
+    if (state == CardRotateState.ROTATE) // to unrotate (to card back)
     {
         CardRotate(e, CardBackPath, CardRotateState.ROTATE, CardRotateState.UNROTATE);
     }
@@ -158,7 +183,7 @@ function UnrotateAllCards(className)
     }
 }
 
-function CardsRotateOnInitialization(duration)
+function CardsRotateOnInitialization(duration, rotateState)
 {
     setTimeout(function ()
     {
@@ -221,12 +246,29 @@ function CheckCardPair(e)
         element1.classList.remove(CardFindState.UNFINDED);
         element2.classList.remove(CardFindState.UNFINDED);
 
-        element1 = null;
-        element2 = null;
+        if (isSimplified == true)
+        {
+            e1image = element1.querySelector(".card-img");
+            e2image = element2.querySelector(".card-img");
 
-        score++;
-        
-        canClick = true;
+            setTimeout(function ()
+            {     
+                e1image.classList.add(CardsImgFlyState.UNFLY);
+                e2image.classList.add(CardsImgFlyState.UNFLY);
+
+                element1 = null;
+                element2 = null;
+                
+                canClick = true;
+            }, halfRotateDuration);
+        }
+        else
+        {
+            element1 = null;
+            element2 = null;
+                
+            canClick = true;
+        }
     }
     else
     {
@@ -235,12 +277,13 @@ function CheckCardPair(e)
             element1 = null;
             element2 = null;
 
-            UnrotateAllCards("card");
-
-            score = 0;
+            if (isSimplified == true)
+                UnrotateAllCards(CardFindState.UNFINDED);
+            else
+                UnrotateAllCards("card");
 
             canClick = true;
-        }, halfRotateDurationWithDelay);
+        }, halfRotateDurationWithDelay / 2);
     }
 }
 
@@ -270,7 +313,7 @@ function WinCounting()
                 break;
             case 7: cardsPerTableMultiplier++;
                 break;
-            case 10: won = true;
+            case 1: won = true;
                 break;
         }
     }
@@ -294,29 +337,39 @@ function WinCounting()
                 break;
         }
     }
+
+    cardsPerTableCount = cardsPerTableMultiplier * 2;
+    pairsCount = (tablesCount * cardsPerTableCount) / 2;
 }
 
-function CheckScore()
+function CheckMatch()
 {
-    if (score == pairsCount)
+    let cards = document.getElementsByClassName(CardFindState.FINDED);
+
+    if ((cards.length / 2) == pairsCount)
     {
         totalScore += 100;
         roundsLeft--;
+
+        document.body.classList.add("preload");
+
+        let duration = halfRotateDurationWithDelay;
+        if (isSimplified == true) duration = halfRotateDurationWithDelay / 2;
 
         setTimeout(function ()
         {     
             UnrotateAllCards("card");
 
-            CardsImgFlyOrUnfly(CardsImgFlyState.UNFLY);
-        }, halfRotateDurationWithDelay);
+            if(isSimplified == false)
+                CardsImgFlyOrUnfly(CardsImgFlyState.UNFLY);
+        }, duration / 2);
 
         setTimeout(function ()
         {
-            CardsImgFlyOrUnfly(CardsImgFlyState.FLY);
-        }, halfRotateDurationWithDelay);
+            if(isSimplified == false)
+                CardsImgFlyOrUnfly(CardsImgFlyState.FLY);
+        }, duration / 2);
 
-        document.body.classList.add("preload");
-        
         setTimeout(function ()
         {
             winCount++;
@@ -325,14 +378,9 @@ function CheckScore()
 
             RefreshAllCounters();
 
-            cardsPerTableCount = cardsPerTableMultiplier * 2;
-            pairsCount = (tablesCount * cardsPerTableCount) / 2;
-
-            score = 0;
-
             if (won == true) OnWon();
             else Initialize();
-        }, halfRotateDurationWithDelay * 2);
+        }, duration);
     }
 }
 
@@ -361,8 +409,8 @@ function RefreshCounter(className, text, count)
 
 function RefreshAllCounters()
 {
-    RefreshCounter("th-score", "Total scores", totalScore);
-    RefreshCounter("th-moves", "Total moves", totalMoves);
+    RefreshCounter("th-score", "Scores", totalScore);
+    RefreshCounter("th-moves", "Moves", totalMoves);
     RefreshCounter("th-rounds", "Rounds left", roundsLeft);
 }
 
@@ -398,6 +446,30 @@ function CreateTables(tablesCount)
     thScore.className = "text-th th-score";
     thScore.innerHTML = "Total scores: 0";
 
+    let thTime = document.createElement("th");
+    thTime.className = "text-th th-time";
+
+    let spanHr = document.createElement("span");
+    spanHr.className = "span-time";
+    spanHr.id = "hr";
+    spanHr.innerHTML = hrString;
+
+    let spanMin = document.createElement("span");
+    spanMin.className = "span-time";
+    spanMin.id = "min";
+    spanMin.innerHTML = minString;
+
+    let spanSec = document.createElement("span");
+    spanSec.className = "span-time";
+    spanSec.id = "sec";
+    spanSec.innerHTML = secString;
+
+    thTime.appendChild(spanHr);
+    thTime.innerHTML += ":";
+    thTime.appendChild(spanMin);
+    thTime.innerHTML += ":";
+    thTime.appendChild(spanSec);
+
     let thMoves = document.createElement("th");
     thMoves.className = "text-th th-moves";
     thMoves.innerHTML = "Total moves: 0";
@@ -412,6 +484,7 @@ function CreateTables(tablesCount)
 
     tr.appendChild(thDot);
     tr.appendChild(thScore);
+    tr.appendChild(thTime);
     tr.appendChild(thMoves);
     tr.appendChild(thRounds);
     tr.appendChild(thDot2);
@@ -562,6 +635,7 @@ function OnWon()
 {
     winCount = 0;
     won = false;
+    time = false;
 
     document.body.classList.remove(bodyPreloadClassName);
 
@@ -592,11 +666,15 @@ function OnWon()
 
     let thScore = document.createElement("th");
     thScore.className = "text-th th-won";
-    thScore.innerHTML = "Total scores"
+    thScore.innerHTML = "Scores"
+
+    let thTime = document.createElement("th");
+    thTime.className = "text-th th-won";
+    thTime.innerHTML = "Time"
 
     let thMoves = document.createElement("th");
     thMoves.className = "text-th th-won";
-    thMoves.innerHTML = "Total moves";
+    thMoves.innerHTML = "Moves";
 
     let thDot2 = document.createElement("th");
     thDot2.className = "th-dot";
@@ -605,6 +683,7 @@ function OnWon()
     tr.appendChild(thDot);
     tr.appendChild(thDif);
     tr.appendChild(thScore);
+    tr.appendChild(thTime);
     tr.appendChild(thMoves);
     tr.appendChild(thDot2);
 
@@ -639,6 +718,30 @@ function OnWon()
     thScore2.className = "text-th th-won th-score";
     thScore2.innerHTML = totalScore;
 
+    let thTime2 = document.createElement("th");
+    thTime2.className = "text-th th-won th-time";
+
+    let spanHr = document.createElement("span");
+    spanHr.className = "span-time";
+    spanHr.id = "hr";
+    spanHr.innerHTML = hrString;
+
+    let spanMin = document.createElement("span");
+    spanMin.className = "span-time";
+    spanMin.id = "min";
+    spanMin.innerHTML = minString;
+
+    let spanSec = document.createElement("span");
+    spanSec.className = "span-time";
+    spanSec.id = "sec";
+    spanSec.innerHTML = secString;
+
+    thTime2.appendChild(spanHr);
+    thTime2.innerHTML += ":";
+    thTime2.appendChild(spanMin);
+    thTime2.innerHTML += ":";
+    thTime2.appendChild(spanSec);
+
     let thMoves2 = document.createElement("th");
     thMoves2.className = "text-th th-won th-moves";
     thMoves2.innerHTML = totalMoves;
@@ -650,12 +753,22 @@ function OnWon()
     tr2.appendChild(thDot3);
     tr2.appendChild(thDif2);
     tr2.appendChild(thScore2);
+    tr2.appendChild(thTime2);
     tr2.appendChild(thMoves2);
     tr2.appendChild(thDot4);
 
     table2.appendChild(tr2);
 
     wonDiv.appendChild(table2);
+
+    if (isSimplified == true)
+    {
+        let wonSimpleLabel = document.createElement("label");
+        wonSimpleLabel.className = "start-dif start-light-lagel text";
+        wonSimpleLabel.innerHTML = "● Light Mode On ●";
+
+        wonDiv.appendChild(wonSimpleLabel);
+    }
 
     let wonLabel = document.createElement("label");
     wonLabel.className = "won-label text";
@@ -704,9 +817,27 @@ function OnStart()
     element1 = null;
     element2 = null;
 
-    score = 0;
     totalScore = 0;
     totalMoves = 0;
+
+    second = 0;
+    minute = 0;
+    hour = 0;
+    hrString = "00";
+    minString = "00";
+    secString = "00";
+    time = true;
+    stopWatchStarted = false;
+
+    let curDif = localStorage.getItem("difficult");
+
+    if (curDif == null) currentDifficult = 10;
+    else currentDifficult = JSON.parse(curDif);
+
+    let isLightChecked = localStorage.getItem("lightIsChecked");
+
+    if (isLightChecked == null) isSimplified = false;
+    else isSimplified = JSON.parse(isLightChecked);
 
     let mainDiv = document.getElementsByClassName("main-div")[0];
     mainDiv.innerHTML = '';
@@ -744,7 +875,6 @@ function OnStart()
 
     let thNormal = document.createElement("th");
     thNormal.className = "text-th th-start";
-    thNormal.classList.add(selectedClassName);
     thNormal.innerHTML = "Normal";
     thNormal.setAttribute("onclick", "ChangeDifficult(this, DifficultyState.NORMAL)");
 
@@ -757,6 +887,10 @@ function OnStart()
     thDot2.className = "th-dot";
     thDot2.innerHTML = "●";
 
+    if (currentDifficult == DifficultyState.EASY) ChangeDifficult(thEasy, DifficultyState.EASY);
+    else if (currentDifficult == DifficultyState.NORMAL) ChangeDifficult(thNormal, DifficultyState.NORMAL);
+    else if (currentDifficult == DifficultyState.HARD) ChangeDifficult(thHard, DifficultyState.HARD);
+
     tr.appendChild(thDot);
     tr.appendChild(thEasy);
     tr.appendChild(thNormal);
@@ -766,6 +900,22 @@ function OnStart()
     table.appendChild(tr);
 
     startDiv.appendChild(table);
+
+    let startSimpleLabel = document.createElement("label");
+    startSimpleLabel.className = "start-dif start-light-lagel text";
+    startSimpleLabel.innerHTML = "●";
+
+    let lightModeCheck = document.createElement("input");
+    lightModeCheck.className = "light-check";
+    lightModeCheck.type = "checkbox";
+    lightModeCheck.setAttribute("onclick", "GetLightModeStatus(this)");
+    
+    if (isSimplified == true) lightModeCheck.setAttribute("checked", true);
+
+    startSimpleLabel.appendChild(lightModeCheck);
+    startSimpleLabel.innerHTML += " Light mode ●";
+
+    startDiv.appendChild(startSimpleLabel);
 
     mainDiv.appendChild(startDiv);
 }
@@ -783,4 +933,55 @@ function ChangeDifficult(e, difficult)
 
     currentDifficult = difficult;
     roundsLeft = currentDifficult;
+
+    localStorage.setItem("difficult", currentDifficult);
+}
+
+function GetLightModeStatus(isChecked)
+{
+    let check = isChecked.checked;
+
+    if (check == true) isSimplified = true;
+    else isSimplified = false;
+
+    localStorage.setItem("lightIsChecked", isSimplified);
+}
+
+// Time
+
+function StopWatch()
+{
+    if (time)
+    {
+        stopWatchStarted = true;
+
+        second++;
+ 
+        if (second == 60)
+        {
+            minute++;
+            second = 0;
+        }
+
+        if (minute == 60)
+        {
+            hour++;
+            minute = 0;
+            second = 0;
+        }
+
+        hrString = hour;
+        minString = minute;
+        secString = second;
+
+        if (hour < 10) hrString = "0" + hrString;
+        if (minute < 10) minString = "0" + minString;
+        if (second < 10) secString = "0" + secString;
+
+        document.getElementById("hr").innerHTML = hrString;
+        document.getElementById("min").innerHTML = minString;
+        document.getElementById("sec").innerHTML = secString;
+
+        setTimeout(StopWatch, 1000);
+    }
 }

@@ -136,7 +136,7 @@ body * {
 }
 
 .text-th {
-    min-width: 175px;
+    min-width: 130px;
     padding: 5px 0px;
     border: #ffe70d 1px solid;
     border-radius: 2px;
@@ -249,6 +249,22 @@ body * {
     background-color: #ffe70d;
     color: #322e41;
     font-weight: bolder;
+}
+
+.start-table + .start-light-lagel {
+    margin: 10px 0px 0px 0px;
+}
+
+.start-light-lagel {
+    color:#ffe70d
+}
+
+.start-light-lagel + .won-label {
+    margin: 30px 0px 0px 0px;
+}
+
+.won-table + .start-light-lagel {
+    margin: 10px 0px 0px 0px;
 }
 
 @keyframes cardFly {
