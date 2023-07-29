@@ -194,6 +194,7 @@ body.preload * {
 
 .light-label {
     display: flex;
+    align-items: center;
     color: #ffe70d;
     font-size: 4vh;
 }
