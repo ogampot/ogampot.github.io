@@ -85,7 +85,7 @@ body.preload * {
     height: fit-content;
     display: inline-block;
     z-index: 100;
-    margin: 2vh;
+    margin: 1.5vh;
 }
 
 .rotate {
