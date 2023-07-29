@@ -2,17 +2,39 @@ body {
     position: fixed;
     width: 100%;
     height: 100%;
+    margin: 0;
     z-index: -10;
     background-color: #322e41;
-    margin: 0;
+}
+
+body * {
+    user-select: none;
 }
 
 body.preload * {
     pointer-events: none;
 }
 
-body * {
-    user-select: none;
+.text {
+    color: #eeeeee;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 3vw;
+    font-weight: bolder;
+    letter-spacing: 0.2vh;
+    text-align: center;
+}
+
+.bordered {
+    z-index: 50;
+    padding: 0.5vh 1.5vh 0.6vh 1.5vh;
+    background-color: #322e41;
+    border: #eeeeee 2px solid;
+    border-radius: 50vh;
+}
+
+.dot-th {
+    font-size: 3vh;
+    color: #ffe70d;
 }
 
 .bg {
@@ -29,20 +51,20 @@ body * {
     z-index: -5;
 }
 
-.bg-label {
-    margin: 10px;
+.main-label-div {
+    display: flex;
+    justify-content: center;
+    margin: 1vh;
 }
 
-.bg-label-text {
+.main-label {
     color: #ffe70d;
-    background-color: #322e41;
-    border: #eeeeee 2px solid;
-    border-radius: 50px;
-    padding: 2px 6px 4px 6px;
+    padding: 1px 6px 2px 6px;
+    font-size: 2vh;
 }
 
 .main-div {
-    max-width: 100%;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -50,7 +72,7 @@ body * {
     align-items: center;
 }
 
-.table {
+.board {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -63,8 +85,7 @@ body * {
     height: fit-content;
     display: inline-block;
     z-index: 100;
-    margin: 15px;
-    user-select: none;
+    margin: 2vh;
 }
 
 .rotate {
@@ -80,90 +101,55 @@ body * {
     pointer-events: none;
 }
 
-.card-input {
-    pointer-events: none;
-}
-
 .card-img {
-    width: 75px;
+    max-width: 10vh;
     height: auto;
-    outline: #eeeeee 4px solid;
-    border-radius: 10px;
+    outline: #eeeeee 0.5vh solid;
+    border-radius: 0.5vh;
     vertical-align: top;
-    pointer-events: none;
 }
 
-.card-fly {
+.fly {
     animation: cardFly 1s ease-out;
 }
 
-.card-unfly {
+.unfly {
     animation: cardUnfly 1s ease-in;
     transform: translateY(-100px);
     opacity: 0;
 }
 
-.won-div {
-    display: flex;
-    justify-content: center;
-}
-
-.text {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-weight: bolder;
-    color: #eeeeee;
-    text-align: center;
-    letter-spacing: 1px;
-}
-
-.text-div {
+.interface-div {
     position: fixed;
-    bottom: 15px;
-    width: auto;
-    min-height: 40px;
+    bottom: 2vw;
+    width: fit-content;
+    height: fit-content;
     display: flex;
-    align-items: center;
     justify-content: center;
-    z-index: 50;
-    margin: 20px 0px;
+    align-items: center;
 }
 
-.text-table {
-    background-color: #322e41;
-    border: #eeeeee 2px solid;
-    border-radius: 50px;
-    padding: 0px 5px;
-}
-
-.text-th {
-    min-width: 130px;
-    padding: 5px 0px;
+.interface-th {
+    width: 16vw;
     border: #ffe70d 1px solid;
-    border-radius: 2px;
-}
-
-.th-dot {
-    font-size: 15px;
-    color: #ffe70d;
+    border-radius: 0.2vw;
+    font-size: 2vh;
+    font-weight: normal;
 }
 
 .see-div {
-    top: 0;
-    bottom: 0;
-    right: 10px;
-    user-select: none;
-}
-
-.see-tr {
+    position: fixed;
+    bottom: 11vh;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    padding: 0;
 }
 
-.see-th {
-    min-width: fit-content;
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
+.see-label {
+    font-size: 2.5vh;
+    font-weight: normal;
+    color: #ffe70d;
 }
 
 .unavailable {
@@ -178,35 +164,50 @@ body * {
 }
 
 .won-text {
-    font-size: 50px;
+    font-size: 10vh;
     animation: 0.5s wonText normal both running linear;
 }
 
 .won-text-div + .won-table {
-    margin: 30px 0px 5px 0px;
-}
-
-.th-won {
-    font-size: 20px;
+    margin: 5vh 0 2vh 0;
 }
 
 .won-table + .won-label {
-    margin: 30px 0px 0px 0px;
+    margin: 5vh 0 2vh 0;
+}
+
+.won-th {
+    font-size: 2vw;
 }
 
 .won-label {
-    background-color: #322e41;
-    border: #eeeeee 2px solid;
-    border-radius: 50px;
-    padding: 2px 10px 4px 10px;
-    font-size: 25px;
+    font-size: 5vh;
+}
+
+.won-table + .light-label {
+    margin: 2vh 0 2vh 0;
+}
+
+.light-label + .won-label {
+    margin: 5vh 0 2vh 0;
+}
+
+.light-label {
+    display: flex;
+    color: #ffe70d;
+    font-size: 4vh;
+}
+
+.light-check {
+    margin: 0 1vw;
+    transform: scale(1.5);
 }
 
 .start-div {
-    z-index: 100;
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 100;
 }
 
 .start-div * {
@@ -214,57 +215,42 @@ body * {
 }
 
 .start-label {
-    background-color: #322e41;
-    border: #eeeeee 2px solid;
-    border-radius: 50px;
-    padding: 2px 10px 4px 10px;
-    font-size: 50px;
-    user-select: none;
+    font-size: 8vh;
 }
 
 .start-label + .start-dif {
-    margin: 40px 0px 10px 0px;
+    margin: 5vh 0 2vh 0;
 }
 
 .start-dif {
-    background-color: #322e41;
-    border: #eeeeee 2px solid;
-    border-radius: 50px;
-    padding: 2px 10px 4px 10px;
-    font-size: 20px;
+    font-size: 3vh;
 }
 
-.tr-start {
-    height: 40px;
-    font-size: 20px;
-    user-select: none;
+.start-table * {
+    height: 5vh;
+    font-size: 3vh;
+    font-weight: normal;
 }
 
-.th-start {
-    width: 50px;
-    margin: 5px;
+.start-th {
+    width: 15vw;
+    margin: 1vw;
 }
 
-.th-selected {
+.selected {
     background-color: #ffe70d;
     color: #322e41;
     font-weight: bolder;
+    border-radius: 0.4vw;
 }
 
-.start-table + .start-light-lagel {
-    margin: 10px 0px 0px 0px;
+.start-table + .light-label {
+    margin: 2vh 0 2vh 0;
 }
 
-.start-light-lagel {
-    color:#ffe70d
-}
-
-.start-light-lagel + .won-label {
-    margin: 30px 0px 0px 0px;
-}
-
-.won-table + .start-light-lagel {
-    margin: 10px 0px 0px 0px;
+.landscape-img {
+    position: fixed;
+    opacity: 0;
 }
 
 @keyframes cardFly {
@@ -334,142 +320,54 @@ body * {
     }
 }
 
-@media screen and (max-width: 700px) {
-    .bg-label {
-        margin: 2px;
-    }
-
-    .bg-label-text {
-        font-weight: normal;
-        letter-spacing: 2px;
-        font-size: 10px;
-    }
-
+@media (orientation: portrait)
+{
     .card {
-        margin: 10px;
+        margin: 0.8vh;
     }
 
     .card-img {
-        width: 35px;
-        outline: #eeeeee 2px solid;
-        border-radius: 5px;
+        max-width: 5.2vh;
+        outline: #eeeeee 0.2vh solid;
+    }
+    
+    .interface-th {
+        width: 16vh;
+        border: #ffe70d 4px solid;
+        border-radius: 6px;
     }
 
-    .rotate {
-        transform: scale(1.2);
+    .see-div {
+        bottom: 9vh;
     }
 
-    .text-div {
-        margin: 0px 0px;
+    .see-label {
+        font-size: 2vh;
     }
 
-    .text-th {
-        font-size: 12px;
+    .won-th {
+        width: 11vh;
+        font-size: 1.8vh;
         font-weight: normal;
-        letter-spacing: 1px;
     }
 
-    .th-start {
-        font-size: 20px;
+    .light-check {
+        margin: 0 2vh;
+        transform: scale(4);
     }
 
-    .th-selected {
-        font-weight: bolder;
+    .start-label {
+        font-size: 6vh;
     }
 
-    .th-won {
-        font-size: 20px;
+    .start-th {
+        width: 15vh;
+        margin: 1vh;
     }
 
-    @keyframes rotate {
-        0% {
-            pointer-events: none;
-            transform: rotateY(180deg) scale(1);
-        }
-
-        100% {
-            transform: rotateY(0deg) scale(1.2);
-        }
-    }
-
-    @keyframes unrotate {
-        0% {
-            pointer-events: none;
-            transform: rotateY(0deg) scale(1.2);
-        }
-
-        100% {
-            transform: rotateY(180deg) scale(1);
-        }
-    }
-}
-
-@media screen and (min-width: 701px) and (max-width: 1000px) {
-    .bg-label {
-        margin: 3px;
-    }
-
-    .bg-label-text {
-        font-weight: normal;
-        letter-spacing: 2px;
-        font-size: 12px;
-    }
-
-    .card {
-        margin: 10px;
-    }
-
-    .card-img {
-        width: 40px;
-        outline: #eeeeee 2px solid;
-        border-radius: 5px;
-    }
-
-    .rotate {
-        transform: scale(1.15);
-    }
-
-    .text-div {
-        margin: 0px 0px;
-    }
-
-    .text-th {
-        font-size: 12px;
-        font-weight: bold;
-        letter-spacing: 1px;
-    }
-
-    .th-start {
-        font-size: 20px;
-    }
-
-    .th-selected {
-        font-weight: bolder;
-    }
-
-    .th-won {
-        font-size: 20px;
-    }
-
-    @keyframes rotate {
-        0% {
-            pointer-events: none;
-            transform: rotateY(180deg) scale(1);
-        }
-
-        100% {
-            transform: rotateY(0deg) scale(1.15);
-        }
-    }
-
-    @keyframes unrotate {
-        0% {
-            pointer-events: none;
-            transform: rotateY(0deg) scale(1.15);
-        }
-
-        100% {
-            transform: rotateY(180deg) scale(1);
-        }
+    .landscape-img {
+        bottom: 15vh;
+        transform: scale(2);
+        opacity: 100%;
     }
 }

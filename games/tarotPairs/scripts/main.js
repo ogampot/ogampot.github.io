@@ -1,4 +1,4 @@
-const cardFolderPath = "../../resources/tarotIMG/";
+const cardFolderPath = "/resources/tarotIMG/";
 const cardImageFormat = ".jpg";
 const cardBackImageName = "cardBack";
 const CardBackPath = cardFolderPath + cardBackImageName + cardImageFormat;
@@ -6,19 +6,19 @@ const CardBackPath = cardFolderPath + cardBackImageName + cardImageFormat;
 const bodyPreloadClassName = "preload";
 const unclickableClassName = "unclickable";
 const unavailableClassName = "unavailable";
-const selectedClassName = "th-selected";
+const selectedClassName = "selected";
 
 const CardRotateState = { ROTATE: "rotate", UNROTATE: "unrotate" };
 const CardFindState = { FINDED: "finded", UNFINDED: "unfinded" };
-const CardsImgFlyState = { FLY: "card-fly", UNFLY: "card-unfly" };
+const CardsImgFlyState = { FLY: "fly", UNFLY: "unfly" };
 const DifficultyState = { EASY: 5, NORMAL: 10, HARD: 15 };
 
 var currentDifficult = 10;
 
-var tablesCount = 1;
-var cardsPerTableMultiplier = 1;
-var cardsPerTableCount = cardsPerTableMultiplier * 2;
-var pairsCount = (tablesCount * cardsPerTableCount) / 2;
+var boardsCount = 1;
+var cardsPerBoardMultiplier = 1;
+var cardsPerBoard = cardsPerBoardMultiplier * 2;
+var pairsCount = (boardsCount * cardsPerBoard) / 2;
 
 const halfRotateDuration = 250;
 const halfRotateDurationWithDelay = halfRotateDuration * 8;
@@ -57,8 +57,8 @@ function Initialize()
     if (document.body.classList.contains(bodyPreloadClassName) == false)
         document.body.classList.add(bodyPreloadClassName);
 
-    CreateTables(tablesCount);
-    AddCardsToEachTable(cardsPerTableCount);
+    CreateBoards(boardsCount);
+    AddCardsToEachBoard(cardsPerBoard);
 
     setTimeout(function ()
     {
@@ -293,9 +293,9 @@ function WinCounting()
     {
         switch (winCount)
         {
-            case 1: tablesCount++;
+            case 1: boardsCount++;
                 break;
-            case 3: cardsPerTableMultiplier++;
+            case 3: cardsPerBoardMultiplier++;
                 break;
             case 5: won = true;
                 break;
@@ -305,13 +305,13 @@ function WinCounting()
     {
         switch (winCount)
         {
-            case 1: tablesCount++;
+            case 1: boardsCount++;
                 break;
-            case 3: cardsPerTableMultiplier++;
+            case 3: cardsPerBoardMultiplier++;
                 break;
-            case 5: tablesCount++;
+            case 5: boardsCount++;
                 break;
-            case 7: cardsPerTableMultiplier++;
+            case 7: cardsPerBoardMultiplier++;
                 break;
             case 1: won = true;
                 break;
@@ -321,25 +321,25 @@ function WinCounting()
     {
         switch (winCount)
         {
-            case 1: tablesCount++;
+            case 1: boardsCount++;
                 break;
-            case 3: cardsPerTableMultiplier++;
+            case 3: cardsPerBoardMultiplier++;
                 break;
-            case 5: cardsPerTableMultiplier++;
+            case 5: cardsPerBoardMultiplier++;
                 break;
-            case 7: tablesCount++;
+            case 7: boardsCount++;
                 break;
-            case 9: cardsPerTableMultiplier++;
+            case 9: cardsPerBoardMultiplier++;
                 break;
-            case 12: cardsPerTableMultiplier++;
+            case 12: cardsPerBoardMultiplier++;
                 break;
             case 15: won = true;
                 break;
         }
     }
 
-    cardsPerTableCount = cardsPerTableMultiplier * 2;
-    pairsCount = (tablesCount * cardsPerTableCount) / 2;
+    cardsPerBoard = cardsPerBoardMultiplier * 2;
+    pairsCount = (boardsCount * cardsPerBoard) / 2;
 }
 
 function CheckMatch()
@@ -409,58 +409,60 @@ function RefreshCounter(className, text, count)
 
 function RefreshAllCounters()
 {
-    RefreshCounter("th-score", "Scores", totalScore);
-    RefreshCounter("th-moves", "Moves", totalMoves);
-    RefreshCounter("th-rounds", "Rounds left", roundsLeft);
+    RefreshCounter("score-th", "Scores", totalScore);
+    RefreshCounter("moves-th", "Moves", totalMoves);
+    RefreshCounter("rounds-th", "Rounds left", roundsLeft);
 }
 
 // Creation
 
-function CreateTables(tablesCount)
+function CreateBoards(boardsCount)
 {
     let mainDiv = document.getElementsByClassName("main-div")[0];
     mainDiv.innerHTML = '';
 
-    for (let i = 0; i < tablesCount; i++)
+    for (let i = 0; i < boardsCount; i++)
     {
-        let table = document.createElement("div");
-        table.className = "table";
+        let board = document.createElement("div");
+        board.className = "board";
 
-        mainDiv.appendChild(table);
+        mainDiv.appendChild(board);
     }
 
-    let textDiv = document.createElement("div");
-    textDiv.className = "text-div";
+    // In-game inteface
 
-    let table = document.createElement("table");
-    table.className = "text-table text";
+    let interfaceDiv = document.createElement("div");
+    interfaceDiv.className = "interface-div bordered text";
+
+    let table1 = document.createElement("table");
+    table1.className = "interface-table";
     
-    let tr = document.createElement("tr");
-    tr.className = "text-tr";
+    let tr1 = document.createElement("tr");
+    tr1.className = "interface-tr";
 
-    let thDot = document.createElement("th");
-    thDot.className = "th-dot";
-    thDot.innerHTML = "●";
+    let thDot1 = document.createElement("th");
+    thDot1.className = "dot-th";
+    thDot1.innerHTML = "●";
 
     let thScore = document.createElement("th");
-    thScore.className = "text-th th-score";
+    thScore.className = "interface-th score-th";
     thScore.innerHTML = "Total scores: 0";
 
     let thTime = document.createElement("th");
-    thTime.className = "text-th th-time";
+    thTime.className = "interface-th time-th";
 
     let spanHr = document.createElement("span");
-    spanHr.className = "span-time";
+    spanHr.className = "time-span";
     spanHr.id = "hr";
     spanHr.innerHTML = hrString;
 
     let spanMin = document.createElement("span");
-    spanMin.className = "span-time";
+    spanMin.className = "time-span";
     spanMin.id = "min";
     spanMin.innerHTML = minString;
 
     let spanSec = document.createElement("span");
-    spanSec.className = "span-time";
+    spanSec.className = "time-span";
     spanSec.id = "sec";
     spanSec.innerHTML = secString;
 
@@ -471,66 +473,48 @@ function CreateTables(tablesCount)
     thTime.appendChild(spanSec);
 
     let thMoves = document.createElement("th");
-    thMoves.className = "text-th th-moves";
+    thMoves.className = "interface-th moves-th";
     thMoves.innerHTML = "Total moves: 0";
 
     let thRounds = document.createElement("th");
-    thRounds.className = "text-th th-rounds";
+    thRounds.className = "interface-th rounds-th";
     thRounds.innerHTML = "Rounds left: 0";
 
     let thDot2 = document.createElement("th");
-    thDot2.className = "th-dot";
+    thDot2.className = "dot-th";
     thDot2.innerHTML = "●";
 
-    tr.appendChild(thDot);
-    tr.appendChild(thScore);
-    tr.appendChild(thTime);
-    tr.appendChild(thMoves);
-    tr.appendChild(thRounds);
-    tr.appendChild(thDot2);
+    tr1.appendChild(thDot1);
+    tr1.appendChild(thScore);
+    tr1.appendChild(thTime);
+    tr1.appendChild(thMoves);
+    tr1.appendChild(thRounds);
+    tr1.appendChild(thDot2);
 
-    table.appendChild(tr);
+    table1.appendChild(tr1);
 
-    textDiv.appendChild(table);
+    interfaceDiv.appendChild(table1);
 
-    mainDiv.appendChild(textDiv);
+    mainDiv.appendChild(interfaceDiv);
+
+    // See cards button
 
     let seeDiv = document.createElement("div");
-    seeDiv.className = "text-div see-div";
+    seeDiv.className = "see-div text";
     seeDiv.setAttribute("onclick", "SeeCardsButton()");
 
-    let table2 = document.createElement("table");
-    table2.className = "text-table text";
-    
-    let tr2 = document.createElement("tr");
-    tr2.className = "text-tr see-tr";
+    let labelSee = document.createElement("label");
+    labelSee.className = "see-label bordered";
+    labelSee.innerHTML = "● See cards (-" + seeCardsCost + " Scores) ●";
 
-    let thDot3 = document.createElement("th");
-    thDot3.className = "th-dot";
-    thDot3.innerHTML = "●";
-
-    let thSee = document.createElement("th");
-    thSee.className = "text-th see-th th-see";
-    thSee.innerHTML = "See cards</br>-" + seeCardsCost + " Scores";
-
-    let thDot4 = document.createElement("th");
-    thDot4.className = "th-dot";
-    thDot4.innerHTML = "●";
-
-    tr2.appendChild(thDot3);
-    tr2.appendChild(thSee);
-    tr2.appendChild(thDot4);
-
-    table2.appendChild(tr2);
-
-    seeDiv.appendChild(table2);
+    seeDiv.appendChild(labelSee);
 
     mainDiv.appendChild(seeDiv);
 }
 
-function AddCardsToEachTable(cardsPerTable)
+function AddCardsToEachBoard(cardsPerTable)
 {
-    let tables = document.getElementsByClassName("table");
+    let tables = document.getElementsByClassName("board");
     
     let ints = RepeatArray(GenerateRandomIntsArray(21, pairsCount), 2);
     let chooser = RandomElementFromArrayNoRepeats(ints);
@@ -643,7 +627,7 @@ function OnWon()
     mainDiv.innerHTML = '';
 
     let wonDiv = document.createElement("div");
-    wonDiv.className = "won-div";
+    wonDiv.className = "won-div text";
 
     let wonTextDiv = document.createElement("div");
     wonTextDiv.className = "won-text-div";
@@ -651,33 +635,33 @@ function OnWon()
     wonDiv.appendChild(wonTextDiv);
 
     let table = document.createElement("table");
-    table.className = "text-table text won-table";
+    table.className = "interface-table won-table bordered";
     
     let tr = document.createElement("tr");
-    tr.className = "text-tr tr-won";
+    tr.className = "interface-tr won-tr";
 
     let thDot = document.createElement("th");
-    thDot.className = "th-dot";
+    thDot.className = "dot-th";
     thDot.innerHTML = "●";
 
     let thDif = document.createElement("th");
-    thDif.className = "text-th th-won";
+    thDif.className = "interface-th won-th";
     thDif.innerHTML = "Difficult";
 
     let thScore = document.createElement("th");
-    thScore.className = "text-th th-won";
+    thScore.className = "interface-th won-th";
     thScore.innerHTML = "Scores"
 
     let thTime = document.createElement("th");
-    thTime.className = "text-th th-won";
+    thTime.className = "interface-th won-th";
     thTime.innerHTML = "Time"
 
     let thMoves = document.createElement("th");
-    thMoves.className = "text-th th-won";
+    thMoves.className = "interface-th won-th";
     thMoves.innerHTML = "Moves";
 
     let thDot2 = document.createElement("th");
-    thDot2.className = "th-dot";
+    thDot2.className = "dot-th";
     thDot2.innerHTML = "●";
 
     tr.appendChild(thDot);
@@ -692,17 +676,17 @@ function OnWon()
     wonDiv.appendChild(table);
 
     let table2 = document.createElement("table");
-    table2.className = "text-table text won-table";
+    table2.className = "interface-table won-table bordered";
     
     let tr2 = document.createElement("tr");
-    tr2.className = "text-tr tr-won";
+    tr2.className = "interface-tr won-tr";
 
     let thDot3 = document.createElement("th");
-    thDot3.className = "th-dot";
+    thDot3.className = "dot-th";
     thDot3.innerHTML = "●";
 
     let thDif2 = document.createElement("th");
-    thDif2.className = "text-th th-won th-dif";
+    thDif2.className = "interface-th won-th dif-th";
 
     switch (currentDifficult)
     {
@@ -715,24 +699,24 @@ function OnWon()
     }
 
     let thScore2 = document.createElement("th");
-    thScore2.className = "text-th th-won th-score";
+    thScore2.className = "interface-th won-th score-th";
     thScore2.innerHTML = totalScore;
 
     let thTime2 = document.createElement("th");
-    thTime2.className = "text-th th-won th-time";
+    thTime2.className = "interface-th won-th time-th";
 
     let spanHr = document.createElement("span");
-    spanHr.className = "span-time";
+    spanHr.className = "time-span";
     spanHr.id = "hr";
     spanHr.innerHTML = hrString;
 
     let spanMin = document.createElement("span");
-    spanMin.className = "span-time";
+    spanMin.className = "time-span";
     spanMin.id = "min";
     spanMin.innerHTML = minString;
 
     let spanSec = document.createElement("span");
-    spanSec.className = "span-time";
+    spanSec.className = "time-span";
     spanSec.id = "sec";
     spanSec.innerHTML = secString;
 
@@ -743,11 +727,11 @@ function OnWon()
     thTime2.appendChild(spanSec);
 
     let thMoves2 = document.createElement("th");
-    thMoves2.className = "text-th th-won th-moves";
+    thMoves2.className = "interface-th won-th moves-th";
     thMoves2.innerHTML = totalMoves;
 
     let thDot4 = document.createElement("th");
-    thDot4.className = "th-dot";
+    thDot4.className = "dot-th";
     thDot4.innerHTML = "●";
 
     tr2.appendChild(thDot3);
@@ -764,14 +748,14 @@ function OnWon()
     if (isSimplified == true)
     {
         let wonSimpleLabel = document.createElement("label");
-        wonSimpleLabel.className = "start-dif start-light-lagel text";
+        wonSimpleLabel.className = "light-label bordered";
         wonSimpleLabel.innerHTML = "● Light Mode On ●";
 
         wonDiv.appendChild(wonSimpleLabel);
     }
 
     let wonLabel = document.createElement("label");
-    wonLabel.className = "won-label text";
+    wonLabel.className = "won-label bordered text";
     wonLabel.innerHTML = "● Back to start ●";
     wonLabel.setAttribute("onclick", "OnStart()");
 
@@ -809,10 +793,10 @@ function ActivateWonText()
 
 function OnStart()
 {
-    tablesCount = 1;
-    cardsPerTableMultiplier = 1;
-    cardsPerTableCount = cardsPerTableMultiplier * 2;
-    pairsCount = (tablesCount * cardsPerTableCount) / 2;
+    boardsCount = 1;
+    cardsPerBoardMultiplier = 1;
+    cardsPerBoard = cardsPerBoardMultiplier * 2;
+    pairsCount = (boardsCount * cardsPerBoard) / 2;
 
     element1 = null;
     element2 = null;
@@ -843,48 +827,48 @@ function OnStart()
     mainDiv.innerHTML = '';
 
     let startDiv = document.createElement("div");
-    startDiv.className = "start-div";
+    startDiv.className = "start-div text";
 
     let startLabel = document.createElement("label");
-    startLabel.className = "start-label text";
+    startLabel.className = "start-label bordered";
     startLabel.innerHTML = "● START ●";
     startLabel.setAttribute("onclick", "Initialize()");
 
     startDiv.appendChild(startLabel);
 
     let startDifLabel = document.createElement("label");
-    startDifLabel.className = "start-dif text";
+    startDifLabel.className = "start-dif bordered";
     startDifLabel.innerHTML = "● Change difficult ●";
 
     startDiv.appendChild(startDifLabel);
 
     let table = document.createElement("table");
-    table.className = "text-table text start-table";
+    table.className = "inteface-table start-table bordered";
     
     let tr = document.createElement("tr");
-    tr.className = "text-tr tr-start";
+    tr.className = "inteface-tr start-tr";
 
     let thDot = document.createElement("th");
-    thDot.className = "th-dot";
+    thDot.className = "dot-th";
     thDot.innerHTML = "●";
 
     let thEasy = document.createElement("th");
-    thEasy.className = "text-th th-start";
+    thEasy.className = "inteface-th start-th";
     thEasy.innerHTML = "Easy";
     thEasy.setAttribute("onclick", "ChangeDifficult(this, DifficultyState.EASY)");
 
     let thNormal = document.createElement("th");
-    thNormal.className = "text-th th-start";
+    thNormal.className = "inteface-th start-th";
     thNormal.innerHTML = "Normal";
     thNormal.setAttribute("onclick", "ChangeDifficult(this, DifficultyState.NORMAL)");
 
     let thHard = document.createElement("th");
-    thHard.className = "text-th th-start";
+    thHard.className = "inteface-th start-th";
     thHard.innerHTML = "Hard";
     thHard.setAttribute("onclick", "ChangeDifficult(this, DifficultyState.HARD)");
 
     let thDot2 = document.createElement("th");
-    thDot2.className = "th-dot";
+    thDot2.className = "dot-th";
     thDot2.innerHTML = "●";
 
     if (currentDifficult == DifficultyState.EASY) ChangeDifficult(thEasy, DifficultyState.EASY);
@@ -902,7 +886,7 @@ function OnStart()
     startDiv.appendChild(table);
 
     let startSimpleLabel = document.createElement("label");
-    startSimpleLabel.className = "start-dif start-light-lagel text";
+    startSimpleLabel.className = "light-label bordered";
     startSimpleLabel.innerHTML = "●";
 
     let lightModeCheck = document.createElement("input");
@@ -917,12 +901,18 @@ function OnStart()
 
     startDiv.appendChild(startSimpleLabel);
 
+    let landscapeImg = document.createElement("img");
+    landscapeImg.className = "landscape-img"
+    landscapeImg.src = "resources/landscape_white.png";
+
+    startDiv.appendChild(landscapeImg);
+
     mainDiv.appendChild(startDiv);
 }
 
 function ChangeDifficult(e, difficult)
 {
-    let thStart = document.getElementsByClassName("th-start");
+    let thStart = document.getElementsByClassName("start-th");
 
     for (let i = 0; i < thStart.length; i++)
     {
