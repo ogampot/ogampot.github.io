@@ -121,7 +121,7 @@ body.preload * {
 
 .interface-div {
     position: fixed;
-    bottom: 2vw;
+    bottom: 0.5vw;
     width: fit-content;
     height: fit-content;
     display: flex;
@@ -139,7 +139,7 @@ body.preload * {
 
 .see-div {
     position: fixed;
-    bottom: 11vh;
+    bottom: 10vh;
     display: flex;
     justify-content: center;
     align-items: center;
