@@ -7,6 +7,7 @@ const bodyPreloadClassName = "preload";
 const unclickableClassName = "unclickable";
 const unavailableClassName = "unavailable";
 const selectedClassName = "selected";
+const currentCardClassName = "current";
 
 const CardRotateState = { ROTATE: "rotate", UNROTATE: "unrotate" };
 const CardFindState = { FINDED: "finded", UNFINDED: "unfinded" };
@@ -173,13 +174,16 @@ function UnrotateAllCards(className)
 
     for (let i = 0; i < cards.length; i++)
     {
-        cards[i].classList.remove(CardFindState.FINDED);
+        if (cards[i].classList.contains(currentCardClassName) == false)
+        {
+            cards[i].classList.remove(CardFindState.FINDED);
 
-        if (cards[i].classList.contains(CardFindState.UNFINDED) == false)
-            cards[i].classList.add(CardFindState.UNFINDED);
+            if (cards[i].classList.contains(CardFindState.UNFINDED) == false)
+                cards[i].classList.add(CardFindState.UNFINDED);
         
-        cards[i].classList.remove(unclickableClassName);
-        CardRotate(cards[i], CardBackPath, CardRotateState.ROTATE, CardRotateState.UNROTATE);
+            cards[i].classList.remove(unclickableClassName);
+            CardRotate(cards[i], CardBackPath, CardRotateState.ROTATE, CardRotateState.UNROTATE);
+        }
     }
 }
 
@@ -224,6 +228,7 @@ function CheckCardPair(e)
     {
         element1 = e;
         element1.classList.add(unclickableClassName);
+        element1.classList.add(currentCardClassName);
 
         totalMoves++;
         RefreshAllCounters();
@@ -235,6 +240,7 @@ function CheckCardPair(e)
 
     element2 = e;
     element2.classList.add(unclickableClassName);
+    element2.classList.add(currentCardClassName);
 
     if (element1 == null || element2 == null) return;
 
@@ -245,6 +251,9 @@ function CheckCardPair(e)
 
         element1.classList.remove(CardFindState.UNFINDED);
         element2.classList.remove(CardFindState.UNFINDED);
+
+        element1.classList.remove(currentCardClassName);
+        element2.classList.remove(currentCardClassName);
 
         if (isSimplified == true)
         {
@@ -274,6 +283,9 @@ function CheckCardPair(e)
     {
         setTimeout(function ()
         {  
+            element1.classList.remove(currentCardClassName);
+            element2.classList.remove(currentCardClassName);
+            
             element1 = null;
             element2 = null;
 
@@ -313,7 +325,7 @@ function WinCounting()
                 break;
             case 7: cardsPerBoardMultiplier++;
                 break;
-            case 1: won = true;
+            case 10: won = true;
                 break;
         }
     }
