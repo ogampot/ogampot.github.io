@@ -102,7 +102,7 @@ body.preload * {
 }
 
 .card-img {
-    max-width: 10vh;
+    max-width: 7.5vh;
     height: auto;
     outline: #eeeeee 0.5vh solid;
     border-radius: 0.5vh;
