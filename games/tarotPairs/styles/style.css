@@ -46,7 +46,7 @@ body.preload * {
 }
 
 .bg-img {
-    background-image: url("/resources/stars.gif");
+    background-image: url("../resources/stars.gif");
     opacity: 70%;
     z-index: -5;
 }
