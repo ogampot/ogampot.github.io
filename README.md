@@ -1,4 +1,4 @@
-[!Screenshot - main page](https://raw.githubusercontent.com/ogampot/ogampot.github.io/c7dc91be3ffaa2dec58f9cda47935cb26f9b22e4/Screenshot_1.png)
+![Screenshot - main page](https://raw.githubusercontent.com/ogampot/ogampot.github.io/c7dc91be3ffaa2dec58f9cda47935cb26f9b22e4/Screenshot_1.png "Screenshot - main page")
 
 # What's this?
 It's my simple (and at the same time - too contrived) super-cringe website. Dedicated to the three sides of me. 
