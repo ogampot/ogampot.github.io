@@ -967,6 +967,11 @@ body {
 }
 
 @media screen and (max-width: 1024px) and (orientation: portrait) {
+    * {
+        --font-size: 3vh;
+        font-size: var(--font-size);
+    }
+
     .main {
         flex-direction: column;
     }
