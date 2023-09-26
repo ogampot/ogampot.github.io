@@ -968,7 +968,7 @@ body {
 
 @media screen and (max-width: 1024px) and (orientation: portrait) {
     * {
-        --font-size: 3vh;
+        --font-size: 4.75vh;
         font-size: var(--font-size);
     }
 
@@ -996,6 +996,15 @@ body {
         text-overflow: clip;
         overflow: hidden;
         white-space: nowrap;
+    }
+
+    .ic63-source-string {
+        --ic63-sources-font-size: 2vh;
+        font-size: var(--ic63-sources-font-size);
+    }
+
+    .ic63-source-string * {
+        font-size: var(--ic63-sources-font-size);
     }
 }
 
