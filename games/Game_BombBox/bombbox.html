@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hack The Bomb Box</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="icon" type="image/x-icon" href="resources/bomb_box.ico">
+    <script src="scripts/main.js"></script>
+</head>
+<body>
+    <div class="bg-img"></div>
+    <div class="game-start-div">
+        <div class="game-start">
+            <label class="game-label game-name-label">Hack <br> The Bomb Box</label>
+            <label class="game-label game-start-label" onclick="GameStart()">Start</label>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-elements">
+            <div class="ui ui-top">
+                <div class="ui-div timer">
+                    <label class="timer-label glowing-red-text">00:00:00</label>
+                </div>
+            </div>
+            <div class="grid">
+                <!--
+                <div class="game-won hidden">
+                    <label class="game-won-label glowing-green-text">Bomb deactivated</label>
+                </div>
+                -->
+            </div>
+            <div class="ui ui-bottom">
+                <div class="ui-div">
+                    <label class="current-sum-label glowing-red-text">0000</label>
+                </div>
+                <div class="ui-div ui-paths">
+                    <input class="number-path nav-path-back" type="range" min="-10000" max="10000" value="0" tabindex="-1">
+                    <input class="number-path nav-path" type="range" min="-10000" max="10000" value="0" tabindex="-1">
+                    <input class="number-path nav-path" type="range" min="-10000" max="10000" value="0" tabindex="-1">
+                    <input class="number-path nav-path" type="range" min="-10000" max="10000" value="0" tabindex="-1">
+                    <input class="number-path nav-path" type="range" min="-10000" max="10000" value="0" tabindex="-1">
+                    <input class="number-path nav-path" type="range" min="-10000" max="10000" value="0" tabindex="-1">
+                    <input class="number-path nav-path" type="range" min="-10000" max="10000" value="0" tabindex="-1">
+                    <input class="number-path nav-path" type="range" min="-10000" max="10000" value="0" tabindex="-1">
+                    <input class="number-path nav-path" type="range" min="-10000" max="10000" value="0" tabindex="-1">
+                    <input class="number-path nav-path" type="range" min="-10000" max="10000" value="0" tabindex="-1">
+                    <input class="number-path nav-path" type="range" min="-10000" max="10000" value="0" tabindex="-1">
+                    <input class="number-path nav-path" type="range" min="-10000" max="10000" value="0" tabindex="-1">
+                    <input class="number-path need-path" type="range" min="-10000" max="10000" value="0" tabindex="-1">
+                    <input class="number-path current-path" type="range" min="-10000" max="10000" value="0" tabindex="-1">
+                </div>
+                <div class="ui-div ui-pins">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="explosion-div hidden">
+        <div class="explosion-top"></div>
+        <div class="explosion-bottom hidden"></div>
+        <div class="game-restart">
+            <label class="game-restart-label" onclick="location.reload()">Restart</label>
+        </div>
+    </div>
+    <script>
+        window.addEventListener("load", function () {
+            Initialize();
+        });
+    </script>
+</body>
+</html>
