@@ -1,3 +1,376 @@
 .game-list {
+    position: absolute;
+    width: 100%;
+    height: 200%;
+    top: 0;
+    left: 0;
     display: flex;
+    flex-direction: column;
+}
+
+.game-bridge {
+    width: 100%;
+    height: 2%;
+    background-color: #33d666;
+    box-shadow: #33d666 0 0 10px 2px;
+    z-index: 500;
+}
+
+.game-div {
+    position: relative;
+    width: 100%;
+    height: 99%;
+}
+
+.game-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.game-info {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.screenshots-right {
+    flex-direction: row;
+}
+
+.screenshots-left {
+    flex-direction: row-reverse;
+}
+
+.game-info-block {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-block {
+    background: linear-gradient(90deg, transparent, #33d66650, transparent);
+    z-index: 20;
+}
+
+.game-description {
+    position: absolute;
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    z-index: 100;
+}
+
+.game-name {
+    font-size: 8vh;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.game-name-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-text {
+    font-size: 3vh;
+    font-family: sans-serif;
+    letter-spacing: 0.5px;
+    text-align: justify;
+    line-height: 4vh;
+}
+
+.game-screenshots {
+    position: relative;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    overflow: hidden;
+    z-index: 80;
+}
+
+.screen {
+    position: absolute;
+    object-fit: cover;
+    width: 90%;
+    margin: 0 0 1vh 0;
+    border: #111111 2px solid;
+    outline: #33d666 2px solid;
+    border-radius: 20px;
+    box-shadow: #33d66650 0 0 10px 0;
+    z-index: 90;
+}
+
+.top-screen {
+    z-index: 95;
+}
+
+.game-screenshots-nav {
+    width: 100%;
+    height: 10%;
+    margin: 1vh 0 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 100;
+}
+
+.screen-nav-radio-container {
+    position: relative;
+    width: 4vh;
+    height: 4vh;
+    margin: 0 10px 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 50%;
+    transition: 0.2s;
+}
+
+.screen-nav-radio-container:hover {
+    box-shadow: #ffffff 0 0 10px;
+}
+
+.screen-nav-radio {
+    -webkit-appearance: none;
+    appearance: none;
+    position: absolute;
+    width: 3.5vh;
+    height: 3.5vh;
+    margin: 0;
+    border-radius: 50%;
+    background-color: transparent;
+    border: #111111 2px solid;
+    transition: 0.2s;
+}
+
+.screen-nav-radio:checked {
+    background-color: #33d666;
+    border: #111111 2px solid;
+}
+
+.game-play {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 110;
+}
+
+.game-link {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.game-play-button {
+    width: 50%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    background-color: #33d666;
+    border-radius: 10px;
+    border: #111111 2px solid;
+    text-align: center;
+    transition: 0.2s;
+    user-select: none;
+}
+
+.game-play-button:hover {
+    background-color: #33dd80;
+    box-shadow: #33dd80 0 0 10px;
+}
+
+.game-play-button:active {
+    background-color: #33bb60;
+    box-shadow: #33bb60 0 0 10px;
+}
+
+.game-play-button-label {
+    padding: 0.5vh 0 1vh 0;
+    font-size: 8vh;
+    font-weight: bold;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    letter-spacing: 5px;
+    text-shadow: #111111 2px 2px 2px;
+}
+
+.game-play-note {
+    color: #33d666;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 3.5vh;
+    font-weight: bold;
+    text-shadow: #111111 2px 2px 2px, #33d666 -1px -1px 5px;
+}
+
+.tarot-div {
+    background-color: #322e41;
+}
+
+.tarot-back-1 {
+    background-image: url("../Game_TarotPairs/resources/stars.gif");
+}
+
+.tarot-back-2 {
+    background: linear-gradient(75deg, #322e41 45%, transparent);
+}
+
+.tarot-name {
+    color: #f7e00d;
+    font-family: math;
+    font-weight: bold;
+    margin: 0 0 30px 0;
+    padding: 1vh 1vh 0.5vh 1vh;
+    background-color: #322e41;
+    border: #eeeeee 3px solid;
+    border-radius: 50px;
+}
+
+.tarot-name span {
+    font-size: 2vh;
+    margin: 0 15px 0 15px;
+}
+
+.tarot-text span {
+    color: #f7e00d;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.bombbox-div {
+    background-color: #202020;
+}
+
+.bombbox-back-1 {
+    background-image: url("../Game_BombBox/resources/wires.gif");
+    background-size: 200px;
+    filter: contrast(60%) brightness(60%);
+}
+
+.bombbox-back-2 {
+    background: linear-gradient(-80deg, #202020 50%, #7c9177 50.1%, #7c9177 51%, transparent 51.1%, transparent);
+}
+
+.bombbox-name {
+    color: #e74242;
+    text-shadow: #720303 0px 0px 5px, #cf2d2d 1px 1px 5px, #cf2d2d 1px -1px 5px, #cf2d2d -1px 1px 5px, #cf2d2d -1px -1px 5px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 6    vh;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 0 30px 0;
+}
+
+.bombbox-text span {
+    color: #42e742;
+    text-shadow: #037203 0px 0px 5px, #2dcf2d 1px 1px 5px, #2dcf2d 1px -1px 5px, #2dcf2d -1px 1px 5px, #2dcf2d -1px -1px 5px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 1024px) and (orientation: portrait) {
+    .game-list {
+        height: fit-content;
+    }
+
+    .game-bridge {
+        height: 1vh;
+    }
+
+    .game-div {
+        height: fit-content;
+    }
+
+    .game-info {
+        flex-direction: column;
+    }
+
+    .play-block {
+        background: linear-gradient(0deg, transparent, #33d66650, transparent);
+    }
+
+    .game-info-block {
+        width: 100%;
+    }
+
+    .game-description {
+        position: unset;
+    }
+
+    .game-name {
+        margin: 30px 0 30px 0;
+        font-size: 10vw;
+        letter-spacing: 1px;
+    }
+
+    .game-text {
+        font-size: 3.5vh;
+    }
+
+    .game-screenshots {
+        height: 60vw;
+        align-items: flex-start;
+    }
+
+    .screen {
+        margin: 20px 0 0 0;
+    }
+
+    .game-screenshots-nav {
+        height: 10vh;
+    }
+
+    .game-play {
+        height: 30vh;
+    }
+
+    .game-play-button {
+        width: 80%;
+        height: 40%;
+    }
+
+    .game-play-note {
+        font-size: 4.5vh;
+    }
+
+    .tarot-back-2 {
+        background: linear-gradient(180deg, #322e41 55%, transparent);
+    }
+
+    .tarot-name span {
+        margin: 0 3vw 0 3vw;
+    }
+
+    .bombbox-back-2 {
+        background: transparent;
+    }
+
+    .bombbox-text span {
+        text-shadow: #2dcf2d 0px 0px 10px;
+    }
+
+    .bombbox-text-block {
+        background: linear-gradient(180deg, #202020 99%, #7c9177 99.1%, #7c9177 100%, transparent 100%, transparent);
+        z-index: 100;
+    }
 }

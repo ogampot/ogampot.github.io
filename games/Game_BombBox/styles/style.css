@@ -201,7 +201,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: black;
+    color: #000000;
     border-radius: 1vh;
     box-sizing: border-box;
 }
@@ -465,8 +465,7 @@ body {
 .game-name-label {
     position: absolute;
     font-size: 4vh;
-    rotate: 10deg;
-    translate: -6vh -35vh 0;
+    transform: rotate(10deg) translate(-16vh, -35vh);
 }
 
 .go-up {

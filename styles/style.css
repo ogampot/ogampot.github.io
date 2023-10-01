@@ -40,6 +40,7 @@ body {
     align-items: center;
     justify-content: center;
     background-repeat: round;
+    transition: 0.5s;
 }
 
 .main-part-content {
@@ -1013,12 +1014,21 @@ body {
         flex-direction: row;
     }
 
+    .ogampot-title {
+        text-shadow: #f1ff96 0.5px 1.5px, #adff92 -0.5px 1.5px, #92ffd5 0.5px -1.5px, #92d7ff -0.5px -1.5px;
+    }
+
+    .ic63-title {
+        text-shadow: #df96ff 1px 1px, #92ffbc -1px 1px, #efff92 1px -1px, #92d5ff -1px -1px;
+    }
+
     .ic63-sources {
         position: absolute;
         width: 100%;
         min-height: 25vh;
         top: 0;
         left: 0;
+        bottom: 35vh;
         display: flex;
         flex-direction: column;
         align-items: center;

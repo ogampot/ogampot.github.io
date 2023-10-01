@@ -6,12 +6,90 @@
     <title>ogampot's games</title>
     <link rel="stylesheet" href="styles/games_style.css">
     <link rel="icon" type="image/x-icon" href="resources/ogampots_games.ico">
+    <script src="scripts/games_main.js"></script>
 </head>
 <body>
     <div class="main">
         <div class="game-list">
-            <div class="game-div">
-                
+            <div class="game-div tarot-div">
+                <div class="game-back tarot-back-1"></div>
+                <div class="game-back tarot-back-2"></div>
+                <div class="game-info screenshots-right">
+                    <div class="game-info-block">
+                        <div class="game-description">
+                            <div class="game-name tarot-name">
+                                <label class="game-name-label"><span> ● </span> Tarot Pairs <span> ● </span></label>
+                            </div>
+                            <div class="game-text tarot-text">
+                                <p class="game-text-p">It's a simple casual <span>"find a pair"</span> game done in the style of tarot cards.</p>
+                                <p class="game-text-p">The game has three modes, differing in the number of rounds and the number of cards on the board. There is also a <span>"Light Mode"</span>, which makes the game even easier: in this mode, the found cards are not turned over if you make a mistake.</p>
+                                <p class="game-text-p">Test your <span>memory</span> and <span>attention</span> by completing all rounds in one of the modes!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-info-block play-block">
+                        <div class="game-screenshots">
+                            <img class="screen screen-1 top-screen" src="resources/TarotPairs/screen_1.png">
+                            <img class="screen screen-2" src="resources/TarotPairs/screen_2.png">
+                            <img class="screen screen-3" src="resources/TarotPairs/screen_3.png">
+                        </div>
+                        <div class="game-screenshots-nav">
+                            <div class="screen-nav-radio-container"><input class="screen-nav-radio" onclick="SwitchScreenshot(this, 'tarot-div')" value="1" type="radio" checked="checked"></div>
+                            <div class="screen-nav-radio-container"><input class="screen-nav-radio" onclick="SwitchScreenshot(this, 'tarot-div')" value="2" type="radio"></div>
+                            <div class="screen-nav-radio-container"><input class="screen-nav-radio" onclick="SwitchScreenshot(this, 'tarot-div')" value="3" type="radio"></div>
+                        </div>
+                        <div class="game-play">
+                            <div class="game-play-button">
+                                <a class="game-link" href="Game_TarotPairs/tarot.html">
+                                    <label class="game-play-button-label">▶ PLAY</label>
+                                </a>
+                            </div>
+                            <p class="game-play-note">* Mobile support </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="game-bridge"></div>
+            <div class="game-div bombbox-div">
+                <div class="game-back bombbox-back-1"></div>
+                <div class="game-back bombbox-back-2"></div>
+                <div class="game-info screenshots-left">
+                    <div class="game-info-block bombbox-text-block">
+                        <div class="game-description">
+                            <div class="game-name bombbox-name">
+                                <label class="game-name-label">Hack The Bomb Box</label>
+                            </div>
+                            <div class="game-text bombbox-text">
+                                <p class="game-text-p">This is a simple <span>math merge</span> game where you have to <span>deactivate a bomb</span> by hacking it.</p>
+                                <p class="game-text-p">To hack the bomb, you need to move the <span>green area</span> on the sum bar to the <span>yellow area</span>. The position of the area depends on
+                                the <span>sum of all numbers</span> on the playing field. Therefore, to move the green area in the right direction, it is necessary
+                                to decrease or increase the sum.</p>
+                                <p class="game-text-p">The game is quite complicated and confusing, but that is its peculiarity. Will you be able to successfully disarm the
+                                bomb and prevent it from exploding? <span>Let's check it out!</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-info-block play-block">
+                        <div class="game-screenshots">
+                            <img class="screen screen-1 top-screen" src="resources/BombBox/screen_1.jpeg">
+                            <img class="screen screen-2" src="resources/BombBox/screen_2.jpeg">
+                            <img class="screen screen-3" src="resources/BombBox/screen_3.jpeg">
+                        </div>
+                        <div class="game-screenshots-nav">
+                            <div class="screen-nav-radio-container"><input class="screen-nav-radio" onclick="SwitchScreenshot(this, 'bombbox-div')" value="1" type="radio" checked="checked"></div>
+                            <div class="screen-nav-radio-container"><input class="screen-nav-radio" onclick="SwitchScreenshot(this, 'bombbox-div')" value="2" type="radio"></div>
+                            <div class="screen-nav-radio-container"><input class="screen-nav-radio" onclick="SwitchScreenshot(this, 'bombbox-div')" value="3" type="radio"></div>
+                        </div>
+                        <div class="game-play">
+                            <div class="game-play-button">
+                                <a class="game-link" href="Game_BombBox/bombbox.html">
+                                    <label class="game-play-button-label">▶ PLAY</label>
+                                </a>
+                            </div>
+                            <p class="game-play-note">* Mobile support </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
