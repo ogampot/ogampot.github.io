@@ -527,6 +527,11 @@ body {
 }
 
 @media screen and (max-width: 1200px) and (orientation: portrait) {
+    .game-name-label {
+        font-size: 3.5vh;
+        transform: rotate(10deg) translate(-12vh, -35vh);
+    }
+
     .cell {
         width: 8vh;
         height: 8vh;    

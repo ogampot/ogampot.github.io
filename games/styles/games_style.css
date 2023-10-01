@@ -325,6 +325,7 @@
 
     .game-text {
         font-size: 3.5vh;
+        text-align: left;
     }
 
     .game-screenshots {
